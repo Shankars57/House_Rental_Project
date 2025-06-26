@@ -68,7 +68,8 @@ Edit
    bash
    Copy
    Edit
-   git clone https://github.com/your-username/real-estate-platform.git
+   git clone 
+   (https://github.com/Shankars57/House_Rental_Project/tree/master).git
    cd real-estate-platform
 2. Setup Backend
    bash
