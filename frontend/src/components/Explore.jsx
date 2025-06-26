@@ -65,7 +65,7 @@ const Explore = () => {
         top picks.
       </motion.p>
       <motion.div
-        className="mt-20 flex flex-wrap gap-10 justify-center items-center"
+        className="mt-20 flex  gap-10 justify-center items-center"
         id="explore"
         variants={containerVariants}
       >

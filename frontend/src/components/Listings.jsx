@@ -36,6 +36,7 @@ const Listings = () => {
   const divRef = useRef(null);
   const isInView = useInView(divRef, { once: true, margin: "-200px" });
   const { axiosInstance } = useContext(HouseContextProvider);
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -103,70 +104,72 @@ const Listings = () => {
           variants={childVariant}
           className="w-full md:w-[30%] space-y-6"
         >
-          <div>
-            <h2 className="text-base font-medium text-gray-700 mb-1">
-              Bedrooms
-            </h2>
-            <div className="flex flex-wrap md:flex-row gap-2">
-              {uniqueBedrooms.map((bed, index) => (
+          <div className="sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pr-2">
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-base font-medium text-gray-700 mb-1">
+                  Bedrooms
+                </h2>
+                <div className="flex flex-wrap md:flex-row gap-2">
+                  {uniqueBedrooms.map((bed, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setFilterBed(bed)}
+                      className={`px-3 py-1 text-xs rounded-full border transition shadow-sm ${
+                        filterBed === bed
+                          ? "bg-blue-600 text-white"
+                          : "bg-white text-blue-600"
+                      } hover:bg-blue-100`}
+                    >
+                      {bed <= 1 ? `${bed} Bedroom` : `${bed} Bedrooms`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="text-base font-medium text-gray-700 mb-1">
+                  Country
+                </h2>
+                <div className="flex flex-wrap md:flex-row gap-2">
+                  {uniqueCountries.map((country, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setFilterCountry(country)}
+                      className={`px-3 py-1 text-xs rounded-full border transition shadow-sm ${
+                        filterCountry === country
+                          ? "bg-green-600 text-white"
+                          : "bg-white text-green-600"
+                      } hover:bg-green-100`}
+                    >
+                      {country}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {(filterBed || filterCountry) && (
                 <button
-                  key={index}
-                  onClick={() => setFilterBed(bed)}
-                  className={`px-3 py-1 text-xs rounded-full border transition shadow-sm
-                    ${
-                      filterBed === bed
-                        ? "bg-blue-600 text-white"
-                        : "bg-white text-blue-600"
-                    } hover:bg-blue-100`}
+                  onClick={() => {
+                    setFilterBed(null);
+                    setFilterCountry("");
+                  }}
+                  className="w-full mt-2 py-2 text-sm bg-red-100 text-red-600 rounded shadow hover:bg-red-200"
                 >
-                  {bed <= 1 ? `${bed} Bedroom` : `${bed} Bedrooms`}
+                  🔄 Reset Filters
                 </button>
-              ))}
+              )}
+
+              {role?.toLowerCase() === "landlord" && (
+                <button
+                  onClick={() => navigate("/post-listing")}
+                  className="w-full mt-4 py-2 flex items-center justify-center gap-2 text-sm bg-primary text-white rounded hover:bg-primary/90"
+                >
+                  <FaBuilding /> Post New Listing
+                </button>
+              )}
             </div>
           </div>
-
-          <div>
-            <h2 className="text-base font-medium text-gray-700 mb-1">
-              Country
-            </h2>
-            <div className="flex flex-wrap md:flex-row gap-2">
-              {uniqueCountries.map((country, index) => (
-                <button
-                  key={index}
-                  onClick={() => setFilterCountry(country)}
-                  className={`px-3 py-1 text-xs rounded-full border transition shadow-sm
-                    ${
-                      filterCountry === country
-                        ? "bg-green-600 text-white"
-                        : "bg-white text-green-600"
-                    } hover:bg-green-100`}
-                >
-                  {country}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {(filterBed || filterCountry) && (
-            <button
-              onClick={() => {
-                setFilterBed(null);
-                setFilterCountry("");
-              }}
-              className="w-full mt-2 py-2 text-sm bg-red-100 text-red-600 rounded shadow hover:bg-red-200"
-            >
-              🔄 Reset Filters
-            </button>
-          )}
-
-          {role?.toLowerCase() === "landlord" && (
-            <button
-              onClick={() => navigate("/post-listing")}
-              className="w-full mt-4 py-2 flex items-center justify-center gap-2 text-sm bg-primary text-white rounded hover:bg-primary/90"
-            >
-              <FaBuilding /> Post New Listing
-            </button>
-          )}
         </motion.div>
 
         <div className="w-full md:w-[70%]">

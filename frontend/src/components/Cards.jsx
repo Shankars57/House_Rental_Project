@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { motion } from "framer-motion";
 import { zillowData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { HouseContextProvider } from "../context/HouseContext";
 
 const Cards = ({ filterBed, filterCountry, searchName }) => {
   const navigate = useNavigate();
+  const cardTopRef = useRef(null);
+
   const [viewCards, setViewCards] = useState(6);
   const [backendProperties, setBackendProperties] = useState([]);
   const { axiosInstance } = useContext(HouseContextProvider);
@@ -66,12 +68,12 @@ const Cards = ({ filterBed, filterCountry, searchName }) => {
     filteredZillow.length === 0 && filteredBackend.length === 0;
 
   return (
-    <div>
+    <div ref={cardTopRef}>
       {/* Backend Cards */}
       <NewCard properties={filteredBackend} />
 
       {/* Zillow (Frontend) Cards */}
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6 w-full ml-2 md:ml-14">
+      <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 p-6 w-full ml-2 md:ml-14">
         {filteredZillow.length > 0 ? (
           filteredZillow.slice(0, viewCards).map((item, index) => (
             <motion.div
@@ -130,11 +132,14 @@ const Cards = ({ filterBed, filterCountry, searchName }) => {
       {filteredZillow.length > 6 && (
         <div className="flex justify-center my-6">
           <button
-            onClick={() =>
-              setViewCards((prev) =>
-                prev >= filteredZillow.length ? 6 : prev + 6
-              )
-            }
+            onClick={() => {
+              if (viewCards >= filteredZillow.length) {
+                setViewCards(6);
+                cardTopRef.current?.scrollIntoView({ behavior: "smooth" });
+              } else {
+                setViewCards((prev) => prev + 6);
+              }
+            }}
             className="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition"
           >
             {viewCards >= filteredZillow.length ? "Show Less" : "Show More"}

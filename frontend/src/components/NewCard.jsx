@@ -24,7 +24,8 @@ const NewCard = ({ properties = [] }) => {
   };
 
   return (
-    <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6 w-full ml-2 md:ml-14">
+    <motion.div className="grid grid-cols-1 sm:grid-cols-2 
+    lg:grid-cols-2 gap-8 p-6 w-full ml-2 md:ml-14">
       {properties.length > 0 ? (
         properties.map((item, idx) => (
           <motion.div
