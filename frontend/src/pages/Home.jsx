@@ -3,8 +3,9 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Listings from "../components/Listings";
 import Explore from "../components/Explore";
-import StayUpdated from "../components/StayUpdated";
+
 import Footer from "../components/Footer";
+import Subscribe from "../components/Subscribe";
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
       <Header />
       <Listings />
       <Explore />
-      <StayUpdated />
+      <Subscribe />
       <Footer />
     </div>
   );
