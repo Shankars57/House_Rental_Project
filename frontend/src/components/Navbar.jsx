@@ -26,11 +26,9 @@ const Navbar = () => {
     <motion.div
       className={`
         flex items-center justify-between  
-      p-2 
+      p-2 shadow
         ${
-          sticky
-            ? "sticky top-0 z-50 bg-white border-b-[0.5px] bg-red-100"
-            : ""
+          sticky ? "sticky top-0 z-50 bg-white border-b-[0.5px] bg-red-100" : ""
         }
       `}
       transition={sticky ? { type: "spring", stiffness: 500, damping: 10 } : {}}
@@ -41,14 +39,14 @@ const Navbar = () => {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", duration: 0.9 }}
-        className="p-6"
+        className="p-6 "
       >
         <Link
           to="/"
           className="text-primary
           text-2xl
          md:text-lg 
-           font-semibold  flex items-center gap-2"
+           font-semibold   flex items-center gap-2"
         >
           <FaHouseUser className="text-primary/40" />
           House Hunt
@@ -65,7 +63,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      <nav className="hidden md:flex gap-5 items-center">
+      <nav className="hidden md:flex gap-5  items-center">
         <ul className="flex items-center gap-5">
           <li
             className="relative p-1
@@ -74,7 +72,7 @@ const Navbar = () => {
             <Link
               to="/"
               onClick={() => setLinkAct("Home")}
-              className={`text-md font-medium lg:text-xl md:text-sm ${
+              className={`text-md font-medium lg:text-md md:text-sm ${
                 linkAct === "Home" ? "text-white" : "text-gray-700"
               }`}
             >
@@ -97,7 +95,7 @@ const Navbar = () => {
               <a
                 href={"#" + items.slice(0, 1).toLowerCase() + items.slice(1)}
                 onClick={() => setLinkAct(items)}
-                className={`text-md font-medium lg:text-xl md:text-sm ${
+                className={`text-md font-medium lg:text-md md:text-sm ${
                   linkAct === items ? "text-white" : "text-gray-700"
                 }`}
               >
