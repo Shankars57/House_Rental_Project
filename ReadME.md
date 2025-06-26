@@ -69,7 +69,7 @@ Edit
    Copy
    Edit
    git clone 
-   (https://github.com/Shankars57/House_Rental_Project/tree/master).git
+   (https://github.com/Shankars57/House_Rental_Project/tree/main).git
    cd real-estate-platform
 2. Setup Backend
    bash
@@ -89,7 +89,8 @@ Start backend server:
 bash
 Copy
 Edit
-npm start 3. Setup Frontend
+npm start
+3. Setup Frontend
 bash
 Copy
 Edit
