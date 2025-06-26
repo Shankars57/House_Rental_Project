@@ -5,7 +5,7 @@ import Listings from "../components/Listings";
 import Explore from "../components/Explore";
 import Footer from "../components/Footer";
 import Subscribe from "../components/Subscribe";
-import Stayupdated from "../components/StayUpdated";
+import StayUpdated from "../components/StayUpdated";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
       <Explore />
       <Subscribe />
       <Footer />
-      <Stayupdated />
+      <StayUpdated />
     </div>
   );
 };
