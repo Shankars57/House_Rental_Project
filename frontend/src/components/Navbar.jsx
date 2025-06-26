@@ -121,7 +121,7 @@ const Navbar = () => {
          shadow 
          bg-primary/90
           cursor-pointer 
-          lg:text-xl
+          lg:text-md
            text-white"
             onClick={() => navigator("/user-profile")}
           >
@@ -137,7 +137,7 @@ const Navbar = () => {
          shadow 
          bg-primary/90
           cursor-pointer 
-          lg:text-xl
+          lg:text-md
            text-white"
             onClick={() => navigator("/login")}
           >
