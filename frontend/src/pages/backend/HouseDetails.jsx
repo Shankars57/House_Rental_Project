@@ -27,7 +27,7 @@ const HouseDetails = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [commentName, setCommentName] = useState("");
-  const { axiosInstance } = useContext(HouseContextProvider);
+  const { axiosInstance, image } = useContext(HouseContextProvider);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -153,7 +153,7 @@ const HouseDetails = () => {
           {images.map((img, index) => (
             <SwiperSlide key={index}>
               <img
-                src={`http://localhost:4000/uploads/${img}`}
+                src={`${image}/${img}`}
                 alt={`Property image ${index + 1}`}
                 className="w-full h-full object-cover"
               />

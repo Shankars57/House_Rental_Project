@@ -24,7 +24,7 @@ const SinglePropertyPage = () => {
   const navigate = useNavigate();
   const [propertyData, setPropertyData] = useState([]);
   const [showMore, setShowMore] = useState(false);
-  const { axiosInstance } = useContext(HouseContextProvider);
+  const { axiosInstance , image } = useContext(HouseContextProvider);
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -93,7 +93,7 @@ const SinglePropertyPage = () => {
           {property.images.map((img, index) => (
             <SwiperSlide key={index}>
               <img
-                src={`http://localhost:4000/uploads/${img}`}
+                src={`${image}/${img}`}
                 alt={`property-${index}`}
                 className="w-full h-150 object-cover"
               />

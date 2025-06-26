@@ -35,7 +35,7 @@ const childVariants = {
 const Profile = () => {
   const navigate = useNavigate();
   const [filterTenants, setFilterTenants] = useState([]);
-  const { userUrl, axiosInstance } = useContext(HouseContextProvider);
+  const { userUrl, axiosInstance ,image } = useContext(HouseContextProvider);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -107,7 +107,7 @@ const Profile = () => {
             <img
               src={
                 items.image
-                  ? `http://localhost:4000/uploads/${items.image}`
+                  ? `${image}/${items.image}`
                   : items.avatarUrl
               }
               alt={`${items.name}'s avatar`}

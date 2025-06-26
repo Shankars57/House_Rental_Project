@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
 import moment from "moment";
+import { HouseContextProvider } from "../context/HouseContext";
 
 const cardVariants = {
   initial: { opacity: 0, y: 30 },
@@ -15,6 +16,7 @@ const cardVariants = {
 
 const NewCard = ({ properties = [] }) => {
   const navigate = useNavigate();
+  const { image } = useContext(HouseContextProvider);
 
   const isNewProperty = (createdAt) => {
     const postedDate = moment(createdAt);
@@ -36,7 +38,7 @@ const NewCard = ({ properties = [] }) => {
             {/* Image Section */}
             <div className="relative h-52">
               <img
-                src={`http://localhost:4000/uploads/${item.images?.[0]}`}
+                src={`${image}/${item.images?.[0]}`}
                 alt={item.title}
                 className="w-full h-full object-cover"
               />

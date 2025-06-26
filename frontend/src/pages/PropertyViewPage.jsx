@@ -14,7 +14,7 @@ import { HouseContextProvider } from "../context/HouseContext";
 const PropertyViewPage = () => {
   const [properties, setProperties] = useState([]);
   const navigate = useNavigate();
-  const { axiosInstance } = useContext(HouseContextProvider);
+  const { axiosInstance , image } = useContext(HouseContextProvider);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -45,7 +45,7 @@ const PropertyViewPage = () => {
   };
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
         {properties.map((property) => (
           <div
             key={property._id}
@@ -61,7 +61,7 @@ const PropertyViewPage = () => {
               {property.images.map((img, idx) => (
                 <SwiperSlide key={idx}>
                   <img
-                    src={`http://localhost:4000/uploads/${img}`}
+                    src={`${image}/${img}`}
                     alt={`property-${idx}`}
                     className="w-full h-100 object-cover"
                   />

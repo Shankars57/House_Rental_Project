@@ -1,5 +1,4 @@
 import ListingModel from "../models/PostModel.js";
-import imageKit from "../imageKit/imageKit.js";
 const createListing = async (req, res) => {
   try {
     const {

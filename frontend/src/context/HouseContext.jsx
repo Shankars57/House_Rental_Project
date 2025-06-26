@@ -4,16 +4,16 @@ import { toast } from "react-toastify";
 import axios from "axios";
 export const HouseContextProvider = createContext();
 
-
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/api", 
+  baseURL: "https://house-rental-project.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 const HouseContext = ({ children }) => {
-  const userUrl = "http://localhost:4000/api/users";
+  const userUrl = "https://house-rental-project.onrender.com/api/users";
+  const image = "https://house-rental-project.onrender.com/uploads"
   const [token, setToken] = useState();
   const [role, setRole] = useState("");
 
@@ -45,6 +45,7 @@ const HouseContext = ({ children }) => {
     token,
     setToken,
     axiosInstance,
+    image,
     role,
     setRole,
   };
@@ -52,7 +53,6 @@ const HouseContext = ({ children }) => {
     const tokenRetrieve = localStorage.getItem("token");
     if (tokenRetrieve) {
       setToken(tokenRetrieve);
-    
     }
   }, []);
   return (

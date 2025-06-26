@@ -6,7 +6,6 @@ import { motion, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HouseContextProvider } from "../context/HouseContext.jsx";
 
-
 const variant = {
   initial: { y: -100, opacity: 0 },
   animate: {
@@ -36,13 +35,11 @@ const Listings = () => {
   const [backendProperties, setBackendProperties] = useState([]);
   const divRef = useRef(null);
   const isInView = useInView(divRef, { once: true, margin: "-200px" });
-const {axiosInstance} = useContext(HouseContextProvider)
+  const { axiosInstance } = useContext(HouseContextProvider);
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await axiosInstance.get(
-          "http://localhost:4000/api/listing/all-listings"
-        );
+        const res = await axiosInstance.get("/listing/all-listings");
         if (res.data.success) {
           setBackendProperties(res.data.properties);
         }
@@ -70,7 +67,7 @@ const {axiosInstance} = useContext(HouseContextProvider)
 
   return (
     <motion.div
-    id="listings"
+      id="listings"
       ref={divRef}
       variants={variant}
       initial="initial"
@@ -80,7 +77,7 @@ const {axiosInstance} = useContext(HouseContextProvider)
       {/* Header and Search */}
       <div className="text-center">
         <h1 className="text-3xl md:text-2xl font-semibold text-gray-900">
-           Featured Properties
+          Featured Properties
         </h1>
         <p className="mt-3 text-base md:text-sm text-gray-600">
           Discover our handpicked selection of premium rental properties.
@@ -100,14 +97,12 @@ const {axiosInstance} = useContext(HouseContextProvider)
         </form>
       </div>
 
- 
       <div className="mt-10 flex flex-col md:flex-row md:items-start gap-10">
         {/* Filter Sidebar */}
         <motion.div
           variants={childVariant}
           className="w-full md:w-[30%] space-y-6"
         >
-        
           <div>
             <h2 className="text-base font-medium text-gray-700 mb-1">
               Bedrooms
@@ -152,7 +147,6 @@ const {axiosInstance} = useContext(HouseContextProvider)
             </div>
           </div>
 
-     
           {(filterBed || filterCountry) && (
             <button
               onClick={() => {
@@ -165,7 +159,6 @@ const {axiosInstance} = useContext(HouseContextProvider)
             </button>
           )}
 
-   
           {role?.toLowerCase() === "landlord" && (
             <button
               onClick={() => navigate("/post-listing")}
@@ -176,7 +169,6 @@ const {axiosInstance} = useContext(HouseContextProvider)
           )}
         </motion.div>
 
-      
         <div className="w-full md:w-[70%]">
           <Cards
             filterBed={filterBed}
