@@ -1,0 +1,93 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import moment from "moment";
+
+const cardVariants = {
+  initial: { opacity: 0, y: 30 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 20 },
+  },
+};
+
+const NewCard = ({ properties = [] }) => {
+  const navigate = useNavigate();
+
+  const isNewProperty = (createdAt) => {
+    const postedDate = moment(createdAt);
+    return moment().diff(postedDate, "hours") <= 24;
+  };
+
+  return (
+    <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6 w-full ml-2 md:ml-14">
+      {properties.length > 0 ? (
+        properties.map((item, idx) => (
+          <motion.div
+            key={item._id || idx}
+            variants={cardVariants}
+            initial="initial"
+            animate="animate"
+            whileHover={{ scale: 1.03 }}
+            className="rounded-2xl shadow-md overflow-hidden bg-white transition-all duration-300 hover:shadow-xl"
+          >
+            {/* Image Section */}
+            <div className="relative h-52">
+              <img
+                src={`http://localhost:4000/uploads/${item.images?.[0]}`}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+
+              {/* NEW Tag */}
+              {isNewProperty(item.createdAt) && (
+                <span className="absolute top-4 left-4 bg-green-600 text-white text-xs px-3 py-1 rounded-full">
+                  NEW
+                </span>
+              )}
+
+              {/* Bedrooms Tag */}
+              <span className="absolute top-4 right-4 bg-primary/80 text-white text-sm px-3 py-1 rounded-full">
+                {item.bedrooms <= 1 ? "1 Bedroom" : `${item.bedrooms} Bedrooms`}
+              </span>
+            </div>
+
+            {/* Details */}
+            <div className="p-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-primary truncate">
+                  {item.title}
+                </h2>
+                <span className="flex items-center text-sm gap-1 rounded-full px-2 py-1 shadow-md text-yellow-800">
+                  <FaStar className="text-yellow-400" /> 4.9
+                </span>
+              </div>
+
+              <p className="text-gray-400 text-sm flex items-center gap-1 truncate">
+                <FaMapMarkerAlt className="text-gray-400" />
+                {item.location?.city}, {item.location?.country}
+              </p>
+
+              <p className="text-green-600 text-lg font-medium">
+                ₹{item.price} /month
+              </p>
+
+              <button
+                className="w-full py-2 rounded-lg bg-black text-white hover:bg-gray-800 transition"
+                onClick={() => navigate(`/property-details/${item._id}`)}
+              >
+                View Details
+              </button>
+            </div>
+          </motion.div>
+        ))
+      ) : (
+        <></>
+      )}
+    </motion.div>
+  );
+};
+
+export default NewCard;
