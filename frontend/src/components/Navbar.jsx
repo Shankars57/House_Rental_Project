@@ -26,10 +26,8 @@ const Navbar = () => {
     <motion.div
       className={`
         flex items-center justify-between  
-      p-2 shadow
-        ${
-          sticky ? "sticky top-0 z-50 bg-white border-b-[0.5px] bg-red-100" : ""
-        }
+      px-2  shadow
+        ${sticky ? "sticky top-0 z-50 bg-white " : ""}
       `}
       transition={sticky ? { type: "spring", stiffness: 500, damping: 10 } : {}}
       animate={sticky ? { scale: 1.01 } : { scale: 1 }}
@@ -45,11 +43,11 @@ const Navbar = () => {
           to="/"
           className="text-primary
           text-2xl
-         md:text-lg 
+          md:text-lg 
            font-semibold   flex items-center gap-2"
         >
           <FaHouseUser className="text-primary/40" />
-          House Hunt
+          House Rental
         </Link>
       </motion.div>
 
@@ -169,7 +167,7 @@ const Navbar = () => {
           {links.map((items, index) => (
             <a
               key={index}
-              href={`#${items.slice(0, 1).toLowerCase() + items.slice(1)}`}
+              href={`#${items.toLowerCase()}`}
               onClick={() => {
                 setLinkAct(items);
                 setMenuAct(false);

@@ -81,17 +81,17 @@ const LoginPage = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-50">
       <button
-        className="absolute top-10 left-10 px-4 py-2 border rounded-md flex items-center gap-2 hover:bg-orange-500 hover:text-white transition text-sm"
+        className="absolute top-10 left-10 px-4 py-2 border rounded-md flex items-center gap-2 hover:bg-blue-700 hover:text-white transition text-sm"
         onClick={() => navigate("/")}
       >
         <FaArrowAltCircleLeft />
         Home
       </button>
 
-      <div className="w-full max-w-sm p-6 sm:m-0 m-6 border border-orange-300 shadow-lg rounded-lg bg-white">
+      <div className="w-full max-w-sm p-4 sm:m-0 m-6 border border-orange-300 shadow-lg rounded-lg bg-white">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full py-6 text-center">
-            <h1 className="text-3xl font-bold text-orange-500">
+            <h1 className="text-3xl font-bold text-blue-600">
               {login ? "Login" : "Signup"}
             </h1>
             <p className="font-light text-sm text-gray-500">
@@ -118,7 +118,7 @@ const LoginPage = () => {
                   <img
                     src={image ? URL.createObjectURL(image) : assets.upload}
                     onClick={() => fileInputRef.current.click()}
-                    className="w-24 h-24 object-cover border rounded-full cursor-pointer"
+                    className="w-16 h-16 object-cover border rounded-full cursor-pointer"
                     alt="upload"
                   />
                 </div>
@@ -213,7 +213,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="rounded p-2 w-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+              className="rounded p-2 w-full bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
             >
               {login ? "Login" : "Signup"}
             </button>
@@ -224,7 +224,7 @@ const LoginPage = () => {
               <p>
                 Don&apos;t have an account?{" "}
                 <span
-                  className="text-orange-500 cursor-pointer hover:underline"
+                  className="text-blue-700 cursor-pointer hover:underline"
                   onClick={handleClick}
                 >
                   Register
@@ -234,7 +234,7 @@ const LoginPage = () => {
               <p>
                 Already have an account?{" "}
                 <span
-                  className="text-orange-500 cursor-pointer hover:underline"
+                  className="text-blue-500 cursor-pointer hover:underline"
                   onClick={handleClick}
                 >
                   Login

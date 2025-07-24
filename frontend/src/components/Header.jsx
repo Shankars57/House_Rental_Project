@@ -24,9 +24,9 @@ const Header = () => {
           stiffness: 200,
           damping: 20,
         }}
-        className="flex flex-col justify-center gap-8 text-center items-center w-full max-w-screen-lg"
+        className="flex flex-col justify-center gap-6 text-center items-center w-full max-w-screen-lg"
       >
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
+        <h1 className="text-3xl md:text-5xl  font-bold leading-tight">
           Find Co-living Space <br />
           <span className="text-primary mt-2">Rental Home</span>
         </h1>
