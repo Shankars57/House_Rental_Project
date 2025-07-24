@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/UserPanel/Sidebar";
 import { HouseContextProvider } from "../../context/HouseContext";
-import { FaHouseDamage } from "react-icons/fa";
+import {  FaHouseUser } from "react-icons/fa";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -19,7 +19,8 @@ const Layout = () => {
           to="/"
           className="text-primary flex items-center gap-2 font-bold text-xl lg:text-2xl tracking-wide"
         >
-          <FaHouseDamage className="text-primary/40" />House Hunt
+          <FaHouseUser className="text-primary/40" />
+          House Rental
         </Link>
 
         {token ? (

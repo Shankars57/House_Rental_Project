@@ -8,11 +8,11 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
-   const ref = useRef();
-   const inView = useInView(ref,{once:true, margin:"-100px"})
+  const ref = useRef();
+  const inView = useInView(ref, { once: true, margin: "-100px" });
   return (
     <motion.footer
-    ref={ref}
+      ref={ref}
       initial={{ y: 100, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, type: "spring", damping: 20 }}
@@ -22,7 +22,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* About */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">CoLivly</h2>
+          <h2 className="text-xl font-semibold mb-4">House Rental</h2>
           <p className="text-sm text-gray-600">
             Your trusted partner in finding modern, affordable co-living spaces
             tailored for comfort, connection, and convenience.
@@ -64,7 +64,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="text-sm text-gray-600 mt-4">
-            Email: support@colivly.com
+            Email: support@HouseRental.com
           </p>
           <p className="text-sm text-gray-600">Phone: +91 91105 60147</p>
         </div>
@@ -73,7 +73,7 @@ const Footer = () => {
       <hr className="my-6 border-gray-300" />
 
       <div className="text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} CoLivly. All rights reserved.
+        © {new Date().getFullYear()} HouseRental. All rights reserved.
       </div>
     </motion.footer>
   );

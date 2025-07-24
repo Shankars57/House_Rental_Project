@@ -45,28 +45,30 @@ const Explore = () => {
   return (
     <motion.div
       ref={ref}
-      className="mt-30 mb-20"
+      className="h-screen py-20 "
+      id="explore"
       variants={containerVariants}
       initial="initial"
       animate={isInView ? "animate" : "initial"}
     >
-      <motion.h1
-        variants={cardVariants}
-        className="py-4 text-4xl text-center 
+      <div>
+        <motion.h1
+          variants={cardVariants}
+          className="py-4 text-4xl text-center 
         tracking-wider font-medium text-gray-700"
-      >
-        Explore More
-      </motion.h1>
-      <motion.p
-        variants={cardVariants}
-        className="max-sm:text-sm text-gray-600 text-center px-6"
-      >
-        Explore your favorite destiny place by using our service , these are our
-        top picks.
-      </motion.p>
+        >
+          Explore More
+        </motion.h1>
+        <motion.p
+          variants={cardVariants}
+          className="max-sm:text-sm text-gray-600 text-center px-6"
+        >
+          Explore your favorite destiny place by using our service , these are
+          our top picks.
+        </motion.p>
+      </div>
       <motion.div
-        className="mt-20 flex flex-wrap lg:flex-nowrap gap-10 justify-center items-center"
-        id="explore"
+        className="mt-10 flex flex-wrap lg:flex-nowrap gap-10 justify-center items-center"
         variants={containerVariants}
       >
         {exploreData.map((item, idx) => (

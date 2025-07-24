@@ -8,7 +8,6 @@
   font-family: "Outfit", sans-serif;
 }
 
-
 /* Hide number input spinner */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -30,12 +29,15 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
-input:focus{
-  outline:none;
+input:focus {
+  outline: none;
 }
 button {
   cursor: pointer;
 }
 @theme {
   --color-primary: blue;
+}
+.input-field {
+  @apply border border-gray-300 rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-400 transition;
 }

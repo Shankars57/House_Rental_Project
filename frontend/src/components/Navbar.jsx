@@ -2,220 +2,157 @@ import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { HouseContextProvider } from "../context/HouseContext";
-import { FaWarehouse, FaHouseUser } from "react-icons/fa";
+import { FaHouseUser } from "react-icons/fa";
 
 const links = ["Listings", "Explore"];
 
 const Navbar = () => {
   const { token } = useContext(HouseContextProvider);
-  const status = true;
   const [linkAct, setLinkAct] = useState("Home");
   const [sticky, setSticky] = useState(false);
   const [menuAct, setMenuAct] = useState(false);
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const stickyHeader = () => {
+    const handleScroll = () => {
       setSticky(window.scrollY > 100);
     };
-    window.addEventListener("scroll", stickyHeader);
-    return () => window.removeEventListener("scroll", stickyHeader);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.div
-      className={`
-        flex items-center justify-between  
-      px-2  shadow
-        ${sticky ? "sticky top-0 z-50 bg-white " : ""}
-      `}
-      transition={sticky ? { type: "spring", stiffness: 500, damping: 10 } : {}}
-      animate={sticky ? { scale: 1.01 } : { scale: 1 }}
+    <motion.header
+      className={`w-full transition-all duration-300 z-50 ${
+        sticky ? "sticky top-0 bg-white shadow-md" : ""
+      }`}
     >
-      {/* Logo */}
-      <motion.div
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ type: "spring", duration: 0.9 }}
-        className="p-6 "
-      >
-        <Link
-          to="/"
-          className="text-primary
-          text-2xl
-          md:text-lg 
-           font-semibold   flex items-center gap-2"
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+        {/* Logo */}
+        <motion.div
+          initial={{ x: -60, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 0.9 }}
         >
-          <FaHouseUser className="text-primary/40" />
-          House Rental
-        </Link>
-      </motion.div>
-
-      {/* Hamburger Icon (Mobile) */}
-      <div className="md:hidden">
-        <button
-          onClick={() => setMenuAct((prev) => !prev)}
-          className="text-2xl cursor-pointer"
-        >
-          {menuAct ? "✖" : "☰"}
-        </button>
-      </div>
-
-      <nav className="hidden md:flex gap-5  items-center">
-        <ul className="flex items-center gap-5">
-          <li
-            className="relative p-1
-               transition ease duration-500"
+          <Link
+            to="/"
+            onClick={() => setLinkAct("Home")}
+            className="text-xl md:text-2xl font-semibold flex items-center gap-2 text-primary"
           >
-            <Link
-              to="/"
-              onClick={() => setLinkAct("Home")}
-              className={`text-md font-medium lg:text-md md:text-sm ${
-                linkAct === "Home" ? "text-white" : "text-gray-700"
-              }`}
-            >
-              Home
-            </Link>
-            {linkAct === "Home" && (
-              <motion.div
-                layoutId="underline"
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="absolute left-0 right-0 top-0 w-full h-full -z-1 bg-primary rounded-md"
-              ></motion.div>
-            )}
-          </li>
-          {links.map((items, index) => (
-            <li
-              key={index}
-              className="relative p-1
-               transition ease duration-500"
-            >
-              <a
-                href={"#" + items.slice(0, 1).toLowerCase() + items.slice(1)}
-                onClick={() => setLinkAct(items)}
-                className={`text-md font-medium lg:text-md md:text-sm ${
-                  linkAct === items ? "text-white" : "text-gray-700"
+            <FaHouseUser className="text-primary/50" />
+            House Rental
+          </Link>
+        </motion.div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-6">
+          <ul className="flex gap-6">
+            <li>
+              <Link
+                to="/"
+                onClick={() => setLinkAct("Home")}
+                className={`text-sm font-medium relative py-1 px-2 transition ${
+                  linkAct === "Home"
+                    ? "text-white bg-primary rounded"
+                    : "text-gray-700 hover:text-primary"
                 }`}
               >
-                {items}
-              </a>
-              {linkAct === items && (
-                <motion.div
-                  layoutId="underline"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  className="absolute left-0 right-0 top-0 w-full h-full -z-1 bg-primary rounded-md"
-                ></motion.div>
-              )}
+                Home
+              </Link>
             </li>
-          ))}
-        </ul>
-        {token ? (
+            {links.map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setLinkAct(item)}
+                  className={`text-sm font-medium relative py-1 px-2 transition ${
+                    linkAct === item
+                      ? "text-white bg-primary rounded"
+                      : "text-gray-700 hover:text-primary"
+                  }`}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
           <button
-            className="
-        px-4
-         py-2 
-         md:text-sm
-         rounded 
-         shadow 
-         bg-primary/90
-          cursor-pointer 
-          lg:text-md
-           text-white"
-            onClick={() => navigator("/user-profile")}
+            onClick={() => navigate(token ? "/user-profile" : "/login")}
+            className="ml-4 px-4 py-2 text-sm font-medium bg-primary text-white rounded hover:bg-primary/90 transition"
           >
-            Profile
+            {token ? "Profile" : "Login"}
           </button>
-        ) : (
+        </nav>
+
+        {/* Hamburger */}
+        <div className="md:hidden z-50">
           <button
-            className="
-        px-4
-         py-2 
-         md:text-sm
-         rounded 
-         shadow 
-         bg-primary/90
-          cursor-pointer 
-          lg:text-md
-           text-white"
-            onClick={() => navigator("/login")}
+            onClick={() => setMenuAct(!menuAct)}
+            className="text-2xl text-gray-700 focus:outline-none"
           >
-            Login
+            {menuAct ? "✖" : "☰"}
           </button>
-        )}
-      </nav>
+        </div>
+      </div>
 
       {/* Mobile Menu */}
       {menuAct && (
-        <motion.nav
-          className="absolute 
-        top-30
-        left-0 
-        w-full 
-        bg-white 
-        shadow-md 
-         p-2
-         flex 
-         flex-col
-          gap-3
-         items-center
-         text-center
-          md:hidden 
-         z-50"
-          animate={menuAct ? { scale: 1.1 } : { scale: 0.5 }}
-          transition={{ type: "spring", stiffness: 500, dumping: 20 }}
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="md:hidden bg-white px-4 pt-4 pb-6 border-t shadow"
         >
-          {links.map((items, index) => (
-            <a
-              key={index}
-              href={`#${items.toLowerCase()}`}
-              onClick={() => {
-                setLinkAct(items);
-                setMenuAct(false);
-              }}
-              className={`
-              text-md
-               font-medium 
-               ${linkAct === items ? "text-primary" : "text-gray-700"}`}
-            >
-              {items}
-            </a>
-          ))}
-          {token ? (
-            <button
-              className="
-        px-4
-         py-2 
-         md:text-sm
-         rounded 
-         shadow 
-         bg-primary/90
-          cursor-pointer 
-          lg:text-xl
-           text-white"
-              onClick={() => navigator("/user-profile")}
-            >
-              Profile
-            </button>
-          ) : (
-            <button
-              className="
-        px-4
-         py-2 
-         md:text-sm
-         rounded 
-         shadow 
-         bg-primary/90
-          cursor-pointer 
-          lg:text-xl
-           text-white"
-              onClick={() => navigator("/login")}
-            >
-              Login
-            </button>
-          )}
-        </motion.nav>
+          <ul className="flex flex-col gap-4 text-center">
+            <li>
+              <Link
+                to="/"
+                onClick={() => {
+                  setLinkAct("Home");
+                  setMenuAct(false);
+                }}
+                className={`block py-2 px-3 rounded ${
+                  linkAct === "Home"
+                    ? "bg-primary text-white"
+                    : "text-gray-700 hover:text-primary"
+                }`}
+              >
+                Home
+              </Link>
+            </li>
+            {links.map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => {
+                    setLinkAct(item);
+                    setMenuAct(false);
+                  }}
+                  className={`block py-2 px-3 rounded ${
+                    linkAct === item
+                      ? "bg-primary text-white"
+                      : "text-gray-700 hover:text-primary"
+                  }`}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+            <li>
+              <button
+                onClick={() => {
+                  setMenuAct(false);
+                  navigate(token ? "/user-profile" : "/login");
+                }}
+                className="w-full bg-primary text-white py-2 rounded mt-2 font-medium"
+              >
+                {token ? "Profile" : "Login"}
+              </button>
+            </li>
+          </ul>
+        </motion.div>
       )}
-    </motion.div>
+    </motion.header>
   );
 };
 

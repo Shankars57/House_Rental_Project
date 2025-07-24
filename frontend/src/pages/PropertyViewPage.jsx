@@ -63,7 +63,7 @@ const PropertyViewPage = () => {
                   <img
                     src={`${image}/${img}`}
                     alt={`property-${idx}`}
-                    className="w-full h-100 object-cover"
+                    className="w-full h-100 object-fit"
                   />
                 </SwiperSlide>
               ))}
