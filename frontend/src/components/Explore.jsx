@@ -3,10 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { exploreData } from "../assets/assets";
 
 const containerVariants = {
-  initial: {
-    opacity: 0,
-    y: 50,
-  },
+  initial: { opacity: 0, y: 50 },
   animate: {
     opacity: 1,
     y: 0,
@@ -22,19 +19,11 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  initial: {
-    opacity: 0,
-    y: 30,
-  },
+  initial: { opacity: 0, y: 30 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
+    transition: { type: "spring", stiffness: 100, damping: 15, duration: 0.6 },
   },
 };
 
@@ -45,7 +34,7 @@ const Explore = () => {
   return (
     <motion.div
       ref={ref}
-      className="h-screen py-20 "
+      className="min-h-screen py-16 px-4 sm:px-6 md:px-10"
       id="explore"
       variants={containerVariants}
       initial="initial"
@@ -54,38 +43,43 @@ const Explore = () => {
       <div>
         <motion.h1
           variants={cardVariants}
-          className="py-4 text-4xl text-center 
-        tracking-wider font-medium text-gray-700"
+          className="py-4 text-3xl sm:text-4xl text-center tracking-wide font-semibold text-gray-700"
         >
           Explore More
         </motion.h1>
         <motion.p
           variants={cardVariants}
-          className="max-sm:text-sm text-gray-600 text-center px-6"
+          className="text-sm sm:text-base text-gray-600 text-center px-2 sm:px-6"
         >
-          Explore your favorite destiny place by using our service , these are
-          our top picks.
+          Explore your favorite destiny place by using our service. These are our top picks.
         </motion.p>
       </div>
+
       <motion.div
-        className="mt-10 flex flex-wrap lg:flex-nowrap gap-10 justify-center items-center"
+        className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center"
         variants={containerVariants}
       >
         {exploreData.map((item, idx) => (
           <motion.div
             key={idx}
-            className="shadow w-[300px] rounded-md cursor-pointer overflow-hidden bg-white hover:shadow-2xl transition ease duration-300"
+            className="w-full max-w-sm bg-white rounded-md shadow-md hover:shadow-2xl transition duration-300 cursor-pointer"
             variants={cardVariants}
             whileHover={{ scale: 1.03 }}
           >
-            <img src={item.img} className="w-full h-[200px] object-cover" />
-            <motion.div className="p-4">
-              <h1 className="text-xl text-primary/60">{item.title}</h1>
-              <p className="text-sm py-2 text-gray-600">{item.description}</p>
-              <button className="py-2 px-4 border rounded bg-primary/80 text-white hover:bg-primary cursor-pointer transition">
-                Explore more
+            <img
+              src={item.img}
+              alt={item.title}
+              className="w-full h-48 sm:h-56 object-cover rounded-t-md"
+            />
+            <div className="p-4">
+              <h1 className="text-lg font-semibold text-primary/70">
+                {item.title}
+              </h1>
+              <p className="text-sm text-gray-600 py-2">{item.description}</p>
+              <button className="mt-2 px-4 py-2 bg-primary/80 text-white rounded hover:bg-primary transition">
+                Explore More
               </button>
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </motion.div>

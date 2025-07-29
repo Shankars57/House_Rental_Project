@@ -232,7 +232,7 @@ const Houses = () => {
               comments.map((cmt, i) => (
                 <div
                   key={i}
-                  className="p-4 border rounded-md bg-gray-50 shadow-sm"
+                  className=" p-4 border rounded-md bg-gray-50 shadow-sm"
                 >
                   <div className="flex justify-between items-center">
                     <p className="text-sm font-semibold text-primary">

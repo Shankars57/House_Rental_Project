@@ -251,22 +251,21 @@ const HouseDetails = () => {
             </button>
           </div>
 
-          {/* 💬 Comments Section */}
           <div className="pt-6 border-t mt-6">
             <h2 className="text-lg font-semibold mb-4">
               💬 Comments ({comments.length})
             </h2>
 
-            <div className="space-y-4 mb-4 grid gap-2 grid-cols-2">
+      <div className="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {comments.length === 0 ? (
                 <p className="text-gray-500">No comments yet. Be the first!</p>
               ) : (
                 comments.map((cmt, i) => (
                   <div
                     key={i}
-                    className=" p-4 border rounded-md bg-gray-50 shadow-sm"
+                    className="sm:w-full p-4 border rounded-md bg-gray-100 shadow-sm"
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-20">
                       <p className="text-sm font-semibold text-primary">
                         {cmt.name}
                       </p>

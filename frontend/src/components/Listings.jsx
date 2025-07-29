@@ -6,23 +6,8 @@ import { motion, useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HouseContextProvider } from "../context/HouseContext.jsx";
 
-const variant = {
-  initial: { y: -100, opacity: 0 },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 30,
-      staggerChildren: 0.5,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const childVariant = {
-  initial: { opacity: 0, y: 50 },
+const fadeVariant = {
+  initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } },
 };
 
@@ -33,8 +18,9 @@ const Listings = () => {
   const [filterCountry, setFilterCountry] = useState("");
   const [searchName, setSearchName] = useState("");
   const [backendProperties, setBackendProperties] = useState([]);
+
   const divRef = useRef(null);
-  const isInView = useInView(divRef, { once: true, margin: "-200px" });
+  const isInView = useInView(divRef, { once: true, margin: "-100px" });
   const { axiosInstance } = useContext(HouseContextProvider);
 
   useEffect(() => {
@@ -67,16 +53,14 @@ const Listings = () => {
   ];
 
   return (
-    <motion.div
-      id="listings"
-      ref={divRef}
-      variants={variant}
-      initial="initial"
-      animate={isInView && "animate"}
-      className="p-4 md:p-10"
-    >
-      {/* Header and Search */}
-      <div className="text-center">
+    <div id="listings" ref={divRef} className="p-4 md:p-10">
+      {/* Heading & Search */}
+      <motion.div
+        variants={fadeVariant}
+        initial="initial"
+        animate={isInView ? "animate" : "initial"}
+        className="text-center"
+      >
         <h1 className="text-3xl md:text-2xl font-semibold text-gray-900">
           Featured Properties
         </h1>
@@ -96,16 +80,19 @@ const Listings = () => {
           />
           <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </form>
-      </div>
+      </motion.div>
 
       <div className="mt-10 flex flex-col md:flex-row md:items-start gap-10">
-        {/* Filter Sidebar */}
+
         <motion.div
-          variants={childVariant}
+          variants={fadeVariant}
+          initial="initial"
+          animate={isInView ? "animate" : "initial"}
           className="w-full md:w-[30%] space-y-6"
         >
           <div className="sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pr-2">
             <div className="space-y-6">
+           
               <div>
                 <h2 className="text-base font-medium text-gray-700 mb-1">
                   Bedrooms
@@ -127,6 +114,7 @@ const Listings = () => {
                 </div>
               </div>
 
+             
               <div>
                 <h2 className="text-base font-medium text-gray-700 mb-1">
                   Country
@@ -148,6 +136,7 @@ const Listings = () => {
                 </div>
               </div>
 
+          
               {(filterBed || filterCountry) && (
                 <button
                   onClick={() => {
@@ -156,7 +145,7 @@ const Listings = () => {
                   }}
                   className="w-full mt-2 py-2 text-sm bg-red-100 text-red-600 rounded shadow hover:bg-red-200"
                 >
-                  🔄 Reset Filters
+                 Reset Filters
                 </button>
               )}
 
@@ -172,16 +161,22 @@ const Listings = () => {
           </div>
         </motion.div>
 
-        <div className="w-full md:w-[70%]">
+    
+        <motion.div
+          variants={fadeVariant}
+          initial="initial"
+          animate={isInView ? "animate" : "initial"}
+          className="w-full md:w-[70%]"
+        >
           <Cards
             filterBed={filterBed}
             filterCountry={filterCountry}
             searchName={searchName}
             backendProperties={backendProperties}
           />
-        </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
