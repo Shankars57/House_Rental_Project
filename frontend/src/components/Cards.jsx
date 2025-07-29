@@ -69,10 +69,8 @@ const Cards = ({ filterBed, filterCountry, searchName }) => {
 
   return (
     <div ref={cardTopRef}>
-      {/* Backend Cards */}
       <NewCard properties={filteredBackend} />
 
-      {/* Zillow (Frontend) Cards */}
       <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 p-6 w-full ml-2 md:ml-14">
         {filteredZillow.length > 0 ? (
           filteredZillow.slice(0, viewCards).map((item, index) => (
@@ -123,13 +121,13 @@ const Cards = ({ filterBed, filterCountry, searchName }) => {
         ) : isDataEmpty ? (
           <div className="col-span-full text-center py-10">
             <p className="text-2xl text-red-500 font-semibold">
-              🚫 No houses found. Please try different filters.
+              No houses found. Please try different filters.
             </p>
           </div>
         ) : null}
       </motion.div>
-      {/* Show More / Show Less Button */}
-      {filteredZillow.length > 6 && (
+
+      {filteredZillow.length > 4 && (
         <div className="flex justify-center my-6">
           <button
             onClick={() => {

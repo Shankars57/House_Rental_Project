@@ -37,8 +37,8 @@ const Explore = () => {
       className="min-h-screen py-16 px-4 sm:px-6 md:px-10"
       id="explore"
       variants={containerVariants}
-      initial="initial"
-      animate={isInView ? "animate" : "initial"}
+      // initial="initial"
+      // animate={isInView ? "animate" : "initial"}
     >
       <div>
         <motion.h1
