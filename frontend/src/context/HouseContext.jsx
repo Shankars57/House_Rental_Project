@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 const HouseContext = ({ children }) => {
   const userUrl = "https://house-rental-project.onrender.com/api/users";
-  const image = "https://house-rental-project.onrender.com/uploads"
+  const image = "https://house-rental-project.onrender.com/uploads";
   const [token, setToken] = useState();
   const [role, setRole] = useState("");
 

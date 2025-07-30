@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import commentRouter from "./routers/CommentRoutes.js";
-
+import subRouter from "./routers/Subscribe.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -28,6 +28,7 @@ app.use("/api/listing", ListingRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/admin", adminRouter);
 app.use("/api/comments", commentRouter);
+app.use("/api/subscribe", subRouter);
 
 // Default test route
 app.get("/", (req, res) => {

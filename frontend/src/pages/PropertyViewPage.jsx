@@ -46,7 +46,7 @@ const PropertyViewPage = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-        {properties.map((property) => (
+        { properties.length > 0? properties.map((property) => (
           <div
             key={property._id}
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
@@ -123,25 +123,30 @@ const PropertyViewPage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center px-4 py-6 gap-2 justify-center w-full">
+            <div className="flex 
+            items-center px-4 py-6 gap-2 
+            justify-center w-full">
               {" "}
               <button
                 onClick={() => viewPage(property._id)}
-                className=" border px-6 py-1 rounded-md text-md flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary/80"
+                className="
+                 border px-6 py-1
+                  rounded-md text-xs sm:text-md  flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary/80"
               >
                 <FaEye />
                 view
               </button>
               <button
                 onClick={() => handleDelete(property._id)}
-                className="border px-6 py-1 rounded-md text-lg flex items-center justify-center gap-2 bg-red-500 text-white"
+                className="border px-6 py-1 
+                rounded-md text-xs sm:text-lg flex items-center justify-center gap-2 bg-red-500 text-white"
               >
                 <FaTrash />
                 Delete
               </button>
             </div>
           </div>
-        ))}
+        )): <div><p className="text-red-600">No Listings are posted :( </p></div>}
       </div>
     </div>
   );

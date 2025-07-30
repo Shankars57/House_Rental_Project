@@ -217,7 +217,6 @@ const Houses = () => {
           </div>
         </div>
 
-        {/* 💬 Comments Section */}
         <div className="pt-8 border-t mt-6">
           <h2 className="text-lg font-semibold mb-4">
             💬 Comments ({comments.length})

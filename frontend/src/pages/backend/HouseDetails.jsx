@@ -176,28 +176,28 @@ const HouseDetails = () => {
           </div>
 
           <p className="text-gray-600 text-sm">
-            📍{" "}
+            {" "}
             {`${location.address}, ${location.city}, ${location.state} - ${location.pinCode}, ${location.country}`}
           </p>
 
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 text-gray-800 text-sm">
             <p>
-              <strong>🏡 Type:</strong> {propertyType}
+              <strong> Type:</strong> {propertyType}
             </p>
             <p>
-              <strong>🛏️ Bedrooms:</strong> {bedrooms}
+              <strong> Bedrooms:</strong> {bedrooms}
             </p>
             <p>
-              <strong>🛁 Bathrooms:</strong> {bathrooms}
+              <strong> Bathrooms:</strong> {bathrooms}
             </p>
             <p>
-              <strong>🪑 Furnish:</strong> {furnish}
+              <strong> Furnish:</strong> {furnish}
             </p>
             <p>
-              <strong>📅 Age:</strong> {age} years
+              <strong> Age:</strong> {age} years
             </p>
             <p>
-              <strong>💰 Price:</strong> ₹{price.toLocaleString()}
+              <strong> Price:</strong> ₹{price.toLocaleString()}
             </p>
           </div>
 
@@ -224,20 +224,20 @@ const HouseDetails = () => {
             {showDescription ? <FaArrowUp /> : <FaArrowDown />}
           </button>
 
-          <AnimatePresence>
+        
             {showDescription && (
               <motion.div
                 key="desc"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                transition={{ type:"tween",duration: 0.1,  }}
                 className="overflow-hidden border border-primary/10 px-4 py-4 bg-gray-50 rounded-xl text-gray-700"
               >
                 <p>{description || "No description provided."}</p>
               </motion.div>
             )}
-          </AnimatePresence>
+        
 
           <div className="flex flex-wrap gap-4 pt-6">
             <button
@@ -253,10 +253,10 @@ const HouseDetails = () => {
 
           <div className="pt-6 border-t mt-6">
             <h2 className="text-lg font-semibold mb-4">
-              💬 Comments ({comments.length})
+              Comments ({comments.length})
             </h2>
 
-      <div className="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="w-full mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {comments.length === 0 ? (
                 <p className="text-gray-500">No comments yet. Be the first!</p>
               ) : (

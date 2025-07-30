@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
 import NewCard from "./NewCard";
 import { HouseContextProvider } from "../context/HouseContext";
-
+import Tilt from "react-parallax-tilt";
 const Cards = ({ filterBed, filterCountry, searchName }) => {
   const navigate = useNavigate();
   const cardTopRef = useRef(null);
@@ -74,49 +74,59 @@ const Cards = ({ filterBed, filterCountry, searchName }) => {
       <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 p-6 w-full ml-2 md:ml-14">
         {filteredZillow.length > 0 ? (
           filteredZillow.slice(0, viewCards).map((item, index) => (
-            <motion.div
-              key={item._id || index}
-              whileHover={{ scale: 1.03 }}
-              className="rounded-md shadow-lg overflow-hidden bg-white transition-all duration-300 hover:shadow-2xl"
+            <Tilt
+             key={item._id || index}
+              tiltMaxAngleX={10}
+              tiltMaxAngleY={10}
+              perspective={1000}
+              transitionSpeed={400}
+           
             >
-              <div className="relative h-[220px]">
-                <img
-                  src={item.heroImage}
-                  alt={item.agent.name}
-                  className="w-full h-full object-cover"
-                />
-                <p className="absolute top-4 right-4 bg-primary/80 text-white text-sm px-3 py-1 rounded-full">
-                  {item.bedrooms <= 1
-                    ? "1 Bedroom"
-                    : `${item.bedrooms} Bedrooms`}
-                </p>
-              </div>
-
-              <div className="p-4 space-y-2">
-                <div className="flex items-center w-full justify-between">
-                  <h2 className="text-xl font-semibold text-primary">
-                    {item.agent.name}
-                  </h2>
-                  <span className="flex items-center text-sm gap-1 shadow rounded-full px-2 py-1">
-                    <FaStar className="text-yellow-400" />
-                    4.9
-                  </span>
+              {" "}
+              <motion.div
+               
+                whileHover={{ scale: 1.03 }}
+                className="rounded-md shadow-lg overflow-hidden bg-white transition-all duration-300 hover:shadow-2xl"
+              >
+                <div className="relative h-[220px]">
+                  <img
+                    src={item.heroImage}
+                    alt={item.agent.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <p className="absolute top-4 right-4 bg-primary/80 text-white text-sm px-3 py-1 rounded-full">
+                    {item.bedrooms <= 1
+                      ? "1 Bedroom"
+                      : `${item.bedrooms} Bedrooms`}
+                  </p>
                 </div>
-                <p className="text-gray-400 flex items-center text-sm">
-                  <FaMapMarkerAlt className="text-gray-400" /> {item.city},{" "}
-                  {item.country}
-                </p>
-                <p className="text-lg font-medium text-green-600">
-                  ${item.price} /month
-                </p>
-                <button
-                  className="w-full py-2 rounded-lg bg-black text-white hover:bg-gray-800"
-                  onClick={() => navigateToPage(item._id)}
-                >
-                  View Details
-                </button>
-              </div>
-            </motion.div>
+
+                <div className="p-4 space-y-2">
+                  <div className="flex items-center w-full justify-between">
+                    <h2 className="text-xl font-semibold text-primary">
+                      {item.agent.name}
+                    </h2>
+                    <span className="flex items-center text-sm gap-1 shadow rounded-full px-2 py-1">
+                      <FaStar className="text-yellow-400" />
+                      4.9
+                    </span>
+                  </div>
+                  <p className="text-gray-400 flex items-center text-sm">
+                    <FaMapMarkerAlt className="text-gray-400" /> {item.city},{" "}
+                    {item.country}
+                  </p>
+                  <p className="text-lg font-medium text-green-600">
+                    ${item.price} /month
+                  </p>
+                  <button
+                    className="w-full py-2 rounded-lg bg-black text-white hover:bg-gray-800"
+                    onClick={() => navigateToPage(item._id)}
+                  >
+                    View Details
+                  </button>
+                </div>
+              </motion.div>{" "}
+            </Tilt>
           ))
         ) : isDataEmpty ? (
           <div className="col-span-full text-center py-10">

@@ -39,7 +39,9 @@ const Listings = () => {
 
   const uniqueBedrooms = [
     ...new Set(
-      [...zillowData, ...backendProperties].map((item) => item.bedrooms)
+      [...zillowData, ...backendProperties]
+        .map((item) => item.bedrooms)
+        .sort((a, b) => a - b)
     ),
   ];
   const uniqueCountries = [
@@ -54,7 +56,6 @@ const Listings = () => {
 
   return (
     <div id="listings" ref={divRef} className="p-4 md:p-10">
-      {/* Heading & Search */}
       <motion.div
         variants={fadeVariant}
         initial="initial"
@@ -83,7 +84,6 @@ const Listings = () => {
       </motion.div>
 
       <div className="mt-10 flex flex-col md:flex-row md:items-start gap-10">
-
         <motion.div
           variants={fadeVariant}
           initial="initial"
@@ -92,7 +92,6 @@ const Listings = () => {
         >
           <div className="sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pr-2">
             <div className="space-y-6">
-           
               <div>
                 <h2 className="text-base font-medium text-gray-700 mb-1">
                   Bedrooms
@@ -114,7 +113,6 @@ const Listings = () => {
                 </div>
               </div>
 
-             
               <div>
                 <h2 className="text-base font-medium text-gray-700 mb-1">
                   Country
@@ -130,38 +128,37 @@ const Listings = () => {
                           : "bg-white text-green-600"
                       } hover:bg-green-100`}
                     >
-                      {country}
+                      {country.toUpperCase()}
                     </button>
                   ))}
                 </div>
+                <div className="flex xs:flex-col md:flex-row items-center gap-2 justify-around">
+                  {(filterBed || filterCountry) && (
+                    <button
+                      onClick={() => {
+                        setFilterBed(null);
+                        setFilterCountry("");
+                      }}
+                      className="md:w-full mt-2 py-2 px-2 text-sm bg-red-100 text-red-600 rounded shadow hover:bg-red-200"
+                    >
+                      Reset Filters
+                    </button>
+                  )}
+
+                  {role?.toLowerCase() === "landlord" && (
+                    <button
+                      onClick={() => navigate("/post-listing")}
+                      className="md:w-full  mt-4 px-2 py-2 flex items-center justify-center gap-2 text-sm bg-primary text-white rounded hover:bg-primary/90"
+                    >
+                      <FaBuilding /> Post New Listing
+                    </button>
+                  )}
+                </div>
               </div>
-
-          
-              {(filterBed || filterCountry) && (
-                <button
-                  onClick={() => {
-                    setFilterBed(null);
-                    setFilterCountry("");
-                  }}
-                  className="w-full mt-2 py-2 text-sm bg-red-100 text-red-600 rounded shadow hover:bg-red-200"
-                >
-                 Reset Filters
-                </button>
-              )}
-
-              {role?.toLowerCase() === "landlord" && (
-                <button
-                  onClick={() => navigate("/post-listing")}
-                  className="w-full mt-4 py-2 flex items-center justify-center gap-2 text-sm bg-primary text-white rounded hover:bg-primary/90"
-                >
-                  <FaBuilding /> Post New Listing
-                </button>
-              )}
             </div>
           </div>
         </motion.div>
 
-    
         <motion.div
           variants={fadeVariant}
           initial="initial"
