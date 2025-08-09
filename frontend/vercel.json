@@ -1,4 +1,6 @@
 {
   "builds": [{ "src": "frontend/package.json", "use": "@vercel/static-build" }],
-  "routes": [{ "source": "/(.*)", "destination": "/" }]
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
